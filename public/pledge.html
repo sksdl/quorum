@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your pre-order · Quorum</title>
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  .lines td { padding: 8px 6px; }
+  .msg { white-space: pre-wrap; background: var(--soft); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+</style>
+</head>
+<body>
+<main class="stack narrow">
+  <section class="card">
+    <div class="muted" id="by"></div>
+    <h1>Your pre-order</h1>
+    <p id="state"></p>
+  </section>
+  <section class="card">
+    <table class="lines num"><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Price</th><th>Status</th></tr></thead><tbody id="lines"></tbody></table>
+    <table class="num" style="margin-top:8px"><tbody id="totals"></tbody></table>
+  </section>
+  <section class="card hidden" id="note-card">
+    <h3>Message from the creator</h3>
+    <div class="msg" id="message"></div>
+    <p class="muted" style="font-size:13px" id="note-src"></p>
+  </section>
+  <p class="muted" style="font-size:13px">Keep this link to check your pre-order. It is the only place this page is shown.</p>
+</main>
+<script type="module">
+  import { api, esc, usd, header, timeLeft } from '/js/common.js';
+  const [, , slug, , id] = location.pathname.split('/');
+  await header({ slug, active: 'fan' });
+  const { campaign: c, pledge: p } = await api(`/api/campaigns/${slug}/pledge/${id}`);
+  document.getElementById('by').textContent = `${c.creator_name} · ${c.title}`;
+  const exp = p.expires ? new Date(p.expires).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : null;
+  const STATE = {
+    held: `PayPal is holding ${usd(p.total_cents)}. Nothing has been charged. Pre-orders close ${c.status === 'open' ? `in ${esc(timeLeft(c.closes_at).replace(' left', ''))}` : 'soon'}${exp ? `; the hold expires ${esc(exp)} at the latest` : ''}.`,
+    captured: `Everything you ordered is being made. ${p.settlement ? usd(p.settlement.capture_cents) : ''} was charged.`,
+    partially_captured: `Part of your order is being made. ${p.settlement ? `${usd(p.settlement.capture_cents)} was charged and ${usd(p.settlement.release_cents)} of the hold was released.` : ''}`,
+    voided: `Nothing from your order is being made this time. The hold of ${usd(p.total_cents)} was released and nothing was charged.`,
+    capture_failed: 'The charge could not be completed. The creator will contact you.',
+  };
+  document.getElementById('state').innerHTML = (STATE[p.status] || esc(p.status)) + (p.tracking ? `<br>Shipped: ${esc(p.tracking.carrier)} ${esc(p.tracking.number)}` : '');
+  const pill = (d) => (d === 'produce' ? '<span class="pill go">Being made</span>' : d === 'cancel' ? '<span class="pill stop">Not made, released</span>' : '<span class="pill brand">Held</span>');
+  document.getElementById('lines').innerHTML = p.lines.map((l) => `<tr><td>${esc(l.name)}</td><td class="r">${l.qty}</td><td class="r">${usd(l.unit_cents * l.qty)}</td><td>${pill(l.decision)}</td></tr>`).join('');
+  document.getElementById('totals').innerHTML = `<tr><td>Shipping</td><td class="r">${usd(p.shipping_cents)}</td></tr><tr><td><b>Held</b></td><td class="r"><b>${usd(p.total_cents)}</b></td></tr>` +
+    (p.settlement ? `<tr><td>Charged</td><td class="r">${usd(p.settlement.capture_cents)}</td></tr><tr><td>Released</td><td class="r">${usd(p.settlement.release_cents)}</td></tr>` : '');
+  if (p.settlement) {
+    document.getElementById('note-card').classList.remove('hidden');
+    document.getElementById('message').textContent = p.settlement.message;
+    document.getElementById('note-src').textContent = p.settlement.note_to_payer ? `The short version is on your PayPal receipt: "${p.settlement.note_to_payer}"` : '';
+  }
+</script>
+</body>
+</html>

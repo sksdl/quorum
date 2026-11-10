@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New campaign · Quorum</title>
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  textarea { font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+  .q { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--soft); font-size: 14px; }
+  .q:last-child { border-bottom: 0; }
+  .q input { width: auto; margin-top: 3px; }
+  .tiers { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main class="stack">
+  <div class="spread"><h1>New campaign</h1><div class="steps"><span class="on" id="s1">1 Paste</span><span id="s2">2 Review</span><span id="s3">3 Publish</span></div></div>
+
+  <section class="card stack" id="paste">
+    <p class="muted">Paste your pre-order post and the factory's quote as they are. Korean, Japanese or English all work. AI pulls out items, prices, factory minimums, price breaks, one-time fees and shipping, and lists what it is unsure about.</p>
+    <div class="grid g2">
+      <label class="field">Your pre-order post<textarea id="post" placeholder="Paste the post you would put on X or Instagram"></textarea></label>
+      <label class="field">Factory quote<textarea id="quote" placeholder="Paste the quote from your factory or print shop"></textarea></label>
+    </div>
+    <div class="row">
+      <button class="brand" id="draft">Draft campaign with AI</button>
+      <button class="ghost" id="demo" type="button">Use the demo post (Korean)</button>
+      <span id="draft-msg"></span>
+    </div>
+  </section>
+
+  <section id="review" class="stack hidden">
+    <div class="card">
+      <div class="spread"><h2 id="d-title"></h2><span id="d-ai"></span></div>
+      <p class="muted" id="d-summary"></p>
+      <p style="font-size:14px"><b>Window:</b> <span id="d-days"></span> days · <b>Shipping out:</b> <span id="d-ship"></span></p>
+      <div id="d-errors"></div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Items and factory price breaks</h3>
+        <table><thead><tr><th>Item</th><th class="r">Fan price</th><th>Factory (KRW per unit)</th></tr></thead><tbody id="d-options"></tbody></table>
+      </div>
+      <div class="card">
+        <h3>Shipping (charged once per order)</h3>
+        <table><tbody id="d-regions"></tbody></table>
+        <h3 style="margin-top:16px">What you said about stock</h3>
+        <ul id="d-prefs" style="padding-left:18px;font-size:14px;margin:0"></ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>AI found these questions</h3>
+      <p class="muted" style="font-size:13px">Tick each one once you have checked it. Publishing needs all of them ticked.</p>
+      <div id="d-questions"></div>
+    </div>
+
+    <div class="card">
+      <h3>Numbers only you can set</h3>
+      <div class="grid g3">
+        <label class="field">KRW per USD for cost estimates<input id="fx" type="number" value="1380" min="100" step="1"></label>
+        <label class="field">Payment fee allowance (share of revenue)<input id="fee" type="number" value="0.05" min="0" max="0.3" step="0.005"></label>
+        <label class="field">Factory quote<select id="vat"><option value="ex">excludes VAT (add 10%)</option><option value="inc">includes VAT</option></select></label>
+      </div>
+      <p class="muted" style="font-size:13px">These feed the profit estimates at settlement. Check your PayPal pricing page for the fee that applies to you.</p>
+      <div class="row" style="margin-top:12px"><button class="brand" id="publish" disabled>Publish campaign</button><span id="pub-msg"></span></div>
+    </div>
+  </section>
+</main>
+<script type="module" src="/js/studio-new.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "templates": [
+    {
+      "language": "en",
+      "item_names": { "A": "Acrylic keyring", "B": "Acrylic stand", "C": "Holographic sticker sheet", "D": "Enamel pin" },
+      "note_capture_full": "{creator} pre-order. Everything you ordered is being made. Charged {captured} for {confirmed_items} and shipping.",
+      "note_capture_partial": "{creator} pre-order. Not made (below factory minimum): {cancelled_items}. Charged {captured} for {confirmed_items} and shipping. Released {released}.",
+      "message_capture_full": "Hi! Good news from {creator}: every item you pre-ordered reached its minimum, so all of it is going into production. PayPal charged {captured} for {confirmed_items} and shipping. Everything ships together at the end of November by Korea Post K-Packet, with a tracking number in PayPal.",
+      "message_capture_partial": "Hi! An update from {creator}. Some items did not reach the factory minimum, so we are not making them this time: {cancelled_items}. PayPal charged {captured} for {confirmed_items} and shipping, and released the rest of your hold ({released}). That part was never charged, so there is nothing to refund. Your order ships at the end of November, with a tracking number in PayPal.",
+      "message_void": "Hi! An update from {creator}. What you pre-ordered did not reach the factory minimum, so it will not be made this time: {cancelled_items}. Your PayPal hold of {released} has been released. You were not charged. Thank you for backing it."
+    },
+    {
+      "language": "ja",
+      "item_names": { "A": "アクリルキーホルダー", "B": "アクリルスタンド", "C": "ホログラムステッカーシート", "D": "エナメルピンバッジ" },
+      "note_capture_full": "{creator}の予約：ご注文の商品はすべて製作が決まりました。{confirmed_items}と送料として{captured}を請求しました。",
+      "note_capture_partial": "{creator}の予約：{cancelled_items}は最低製作数に届かず製作しません。{confirmed_items}と送料として{captured}を請求し、残り{released}の保留は解除しました。",
+      "message_capture_full": "こんにちは。{creator}からのお知らせです。ご予約の商品はすべて最低製作数に届いたので、製作に入ります。PayPalで{confirmed_items}と送料の{captured}を請求しました。11月末に韓国郵便のK-Packetでまとめて発送し、追跡番号はPayPalに登録します。",
+      "message_capture_partial": "こんにちは。{creator}からのお知らせです。{cancelled_items}は最低製作数に届かなかったため、今回は製作しません。PayPalでは{confirmed_items}と送料の{captured}だけを請求し、残りの保留{released}は解除しました。この分は請求されていないので、返金の手続きはありません。11月末に発送し、追跡番号はPayPalに登録します。",
+      "message_void": "こんにちは。{creator}からのお知らせです。{cancelled_items}は最低製作数に届かなかったため、今回のご予約分は製作しません。PayPalの保留{released}は解除しました。請求は発生していません。応援ありがとうございました。"
+    },
+    {
+      "language": "zh-TW",
+      "item_names": { "A": "壓克力鑰匙圈", "B": "壓克力立牌", "C": "全息貼紙", "D": "琺瑯徽章" },
+      "note_capture_full": "{creator}預購：您訂購的商品全部確定製作。已收取{confirmed_items}及運費共{captured}。",
+      "note_capture_partial": "{creator}預購：{cancelled_items}未達工廠最低數量，不會製作。已收取{confirmed_items}及運費共{captured}，其餘{released}預授權已釋放。",
+      "message_capture_full": "您好，這是{creator}的通知。您預購的商品全部達到最低製作數量，即將開始製作。PayPal已收取{confirmed_items}及運費共{captured}。商品將於11月底以韓國郵政K-Packet一起寄出，追蹤號碼會登錄在PayPal。",
+      "message_capture_partial": "您好，這是{creator}的通知。{cancelled_items}未達工廠最低數量，這次不會製作。PayPal只收取了{confirmed_items}及運費共{captured}，其餘的預授權{released}已經釋放，從未扣款，所以不需要退款。商品將於11月底寄出，追蹤號碼會登錄在PayPal。",
+      "message_void": "您好，這是{creator}的通知。{cancelled_items}未達工廠最低數量，所以您這次預購的商品都不會製作。PayPal的預授權{released}已經釋放，您沒有被扣款。謝謝您的支持。"
+    },
+    {
+      "language": "es",
+      "item_names": { "A": "Llavero de acrílico", "B": "Figura de acrílico con base", "C": "Hoja de stickers holográficos", "D": "Pin de esmalte" },
+      "note_capture_full": "Preventa de {creator}. Todo lo que pediste se va a fabricar. Cobrado {captured} por {confirmed_items} y envío.",
+      "note_capture_partial": "Preventa de {creator}. No se fabrica (bajo el mínimo): {cancelled_items}. Cobrado {captured} por {confirmed_items} y envío. Liberado {released}.",
+      "message_capture_full": "¡Hola! Buenas noticias de {creator}: todo lo que reservaste alcanzó el mínimo, así que entra a producción. PayPal cobró {captured} por {confirmed_items} y el envío. Todo se envía junto a finales de noviembre por K-Packet de Correos de Corea, con número de seguimiento en PayPal.",
+      "message_capture_partial": "¡Hola! Una actualización de {creator}. Algunos artículos no alcanzaron el mínimo de fábrica y esta vez no se fabricarán: {cancelled_items}. PayPal cobró solo {captured} por {confirmed_items} y el envío, y liberó el resto de la retención ({released}). Esa parte nunca se cobró, así que no hay nada que reembolsar. Tu pedido sale a finales de noviembre, con número de seguimiento en PayPal.",
+      "message_void": "¡Hola! Una actualización de {creator}. Lo que reservaste no alcanzó el mínimo de fábrica, así que esta vez no se fabricará: {cancelled_items}. La retención de PayPal de {released} ya se liberó. No se te cobró nada. ¡Gracias por tu apoyo!"
+    },
+    {
+      "language": "id",
+      "item_names": { "A": "Gantungan kunci akrilik", "B": "Standee akrilik", "C": "Lembar stiker hologram", "D": "Pin enamel" },
+      "note_capture_full": "Pre-order {creator}. Semua pesananmu diproduksi. Ditagih {captured} untuk {confirmed_items} dan ongkos kirim.",
+      "note_capture_partial": "Pre-order {creator}. Tidak diproduksi (di bawah minimum): {cancelled_items}. Ditagih {captured} untuk {confirmed_items} dan ongkos kirim. Dilepas {released}.",
+      "message_capture_full": "Halo! Kabar baik dari {creator}: semua barang yang kamu pesan mencapai jumlah minimum, jadi semuanya masuk produksi. PayPal menagih {captured} untuk {confirmed_items} dan ongkos kirim. Semua dikirim bersamaan akhir November lewat K-Packet Pos Korea, dengan nomor resi di PayPal.",
+      "message_capture_partial": "Halo! Kabar dari {creator}. Beberapa barang tidak mencapai jumlah minimum pabrik, jadi kali ini tidak diproduksi: {cancelled_items}. PayPal hanya menagih {captured} untuk {confirmed_items} dan ongkos kirim, dan sisa dana yang ditahan ({released}) sudah dilepas. Dana itu tidak pernah ditagih, jadi tidak perlu refund. Pesananmu dikirim akhir November dengan nomor resi di PayPal.",
+      "message_void": "Halo! Kabar dari {creator}. Pesananmu tidak mencapai jumlah minimum pabrik, jadi kali ini tidak diproduksi: {cancelled_items}. Dana {released} yang ditahan PayPal sudah dilepas. Kamu tidak ditagih. Terima kasih atas dukungannya!"
+    },
+    {
+      "language": "de",
+      "item_names": { "A": "Acryl-Schlüsselanhänger", "B": "Acryl-Aufsteller", "C": "Holografischer Stickerbogen", "D": "Emaille-Pin" },
+      "note_capture_full": "Vorbestellung bei {creator}. Alles wird produziert. Belastet {captured} für {confirmed_items} und Versand.",
+      "note_capture_partial": "Vorbestellung bei {creator}. Nicht produziert (unter Mindestmenge): {cancelled_items}. Belastet {captured} für {confirmed_items} und Versand. Freigegeben {released}.",
+      "message_capture_full": "Hallo! Gute Nachrichten von {creator}: Alles, was du vorbestellt hast, hat die Mindestmenge erreicht und geht in Produktion. PayPal hat {captured} für {confirmed_items} und Versand belastet. Alles wird Ende November zusammen per K-Packet der koreanischen Post verschickt, die Sendungsnummer steht dann in PayPal.",
+      "message_capture_partial": "Hallo! Ein Update von {creator}. Einige Artikel haben die Mindestmenge der Fabrik nicht erreicht und werden diesmal nicht produziert: {cancelled_items}. PayPal hat nur {captured} für {confirmed_items} und Versand belastet und den Rest der Reservierung ({released}) freigegeben. Dieser Teil wurde nie belastet, es gibt also nichts zu erstatten. Deine Bestellung geht Ende November raus, mit Sendungsnummer in PayPal.",
+      "message_void": "Hallo! Ein Update von {creator}. Deine Vorbestellung hat die Mindestmenge der Fabrik nicht erreicht und wird diesmal nicht produziert: {cancelled_items}. Die PayPal-Reservierung über {released} wurde freigegeben. Du wurdest nicht belastet. Danke für deine Unterstützung!"
+    },
+    {
+      "language": "fr",
+      "item_names": { "A": "Porte-clés en acrylique", "B": "Support en acrylique", "C": "Planche d'autocollants holographiques", "D": "Pin's en émail" },
+      "note_capture_full": "Précommande {creator}. Tout sera fabriqué. Débité {captured} pour {confirmed_items} et livraison.",
+      "note_capture_partial": "Précommande {creator}. Non fabriqué (sous le minimum) : {cancelled_items}. Débité {captured} pour {confirmed_items} et livraison. Libéré {released}.",
+      "message_capture_full": "Bonjour ! Bonne nouvelle de {creator} : tous les articles précommandés ont atteint leur minimum et partent en fabrication. PayPal a débité {captured} pour {confirmed_items} et la livraison. Tout sera expédié ensemble fin novembre par K-Packet de la poste coréenne, avec un numéro de suivi dans PayPal.",
+      "message_capture_partial": "Bonjour ! Des nouvelles de {creator}. Certains articles n'ont pas atteint le minimum de fabrication et ne seront pas produits cette fois : {cancelled_items}. PayPal a seulement débité {captured} pour {confirmed_items} et la livraison, et a libéré le reste de l'autorisation ({released}). Cette partie n'a jamais été débitée, il n'y a donc rien à rembourser. Votre commande part fin novembre, avec un numéro de suivi dans PayPal.",
+      "message_void": "Bonjour ! Des nouvelles de {creator}. Votre précommande n'a pas atteint le minimum de fabrication et ne sera pas produite cette fois : {cancelled_items}. L'autorisation PayPal de {released} a été libérée. Vous n'avez pas été débité. Merci pour votre soutien !"
+    }
+  ]
+}

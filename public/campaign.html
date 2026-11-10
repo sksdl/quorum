@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-order</title>
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  .cover { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; align-items: start; }
+  .opt { display: grid; grid-template-columns: 96px 1fr auto; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--soft); }
+  .opt:last-child { border-bottom: 0; }
+  .opt img { width: 96px; height: 96px; border-radius: 12px; }
+  .opt h3 { margin: 0; }
+  .opt .meta { font-size: 13px; color: var(--muted); margin: 2px 0 8px; }
+  .qty { display: flex; align-items: center; gap: 6px; }
+  .qty button { width: 32px; height: 32px; padding: 0; justify-content: center; }
+  .qty output { width: 26px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .sum td { border: 0; padding: 4px 0; }
+  .sum tr.total td { font-weight: 700; font-size: 17px; border-top: 1px solid var(--line); padding-top: 10px; }
+  .how li { margin: 6px 0; }
+  #pay-area { min-height: 52px; margin-top: 12px; }
+  paypal-button { display: block; width: 100%; }
+  .mockpay { width: 100%; justify-content: center; background: #ffc439; border-color: #e9b02a; color: #111; font-size: 16px; padding: 12px; }
+  .mockpay small { font-weight: 600; color: var(--mock); }
+  .answer { white-space: pre-wrap; }
+  @media (max-width: 860px) { .cover { grid-template-columns: 1fr; } .opt { grid-template-columns: 64px 1fr; align-items: start; } .opt img { width: 64px; height: 64px; } .opt .qty { grid-column: 2; } }
+</style>
+</head>
+<body>
+<main class="stack">
+  <section class="card">
+    <div class="spread">
+      <div>
+        <div class="muted" id="by"></div>
+        <h1 id="title">Loading</h1>
+      </div>
+      <div class="row"><span class="pill brand" id="left"></span><span class="pill" id="backers"></span></div>
+    </div>
+    <p id="summary"></p>
+  </section>
+
+  <div class="cover">
+    <section class="card">
+      <h2>Items</h2>
+      <div id="options"></div>
+    </section>
+
+    <aside class="stack">
+      <section class="card">
+        <h2>Your pre-order</h2>
+        <label class="field">Ship to
+          <select id="region"></select>
+        </label>
+        <table class="sum num" style="margin-top:10px"><tbody id="sum"></tbody></table>
+        <div id="pay-area">
+          <paypal-button id="paypal-button" type="pay" hidden></paypal-button>
+          <button id="mock-button" class="mockpay hidden" type="button">PayPal <small>MOCK</small></button>
+        </div>
+        <p id="pay-msg" class="muted" style="font-size:13px"></p>
+      </section>
+
+      <section class="card how">
+        <h3>How the payment works</h3>
+        <ol style="padding-left:18px;margin:0">
+          <li>PayPal places a <b>hold</b> for the total. Nothing is charged today.</li>
+          <li>When pre-orders close, each item is made only if it reached its factory minimum (or the creator decides to make it anyway).</li>
+          <li>You are charged for the items that are made, plus shipping once. The rest of the hold is released, so there is no refund to wait for. (If you paid by card, your card issuer may show the released hold as pending for a few days.)</li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <div class="spread"><h3>Ask a question</h3><span id="ask-tag"></span></div>
+        <p class="muted" style="font-size:13px">Any language. Answers come from the campaign details; anything else goes to the creator.</p>
+        <form id="ask" class="row" style="margin-top:8px">
+          <input id="q" placeholder="e.g. Do you ship to Canada?" maxlength="600" style="flex:1">
+          <button class="ghost small" type="submit">Ask</button>
+        </form>
+        <p class="answer" id="answer"></p>
+      </section>
+    </aside>
+  </div>
+</main>
+<script type="module" src="/js/campaign.js"></script>
+</body>
+</html>

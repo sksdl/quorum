@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ship · Quorum</title>
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  textarea { min-height: 160px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; }
+  .conf-high { color: var(--go); font-weight: 600; }
+  .conf-medium { color: var(--short); font-weight: 600; }
+  .conf-low { color: var(--stop); font-weight: 600; }
+</style>
+</head>
+<body>
+<main class="stack">
+  <div><div class="muted" id="by"></div><h1>Add tracking numbers</h1></div>
+  <section class="card stack">
+    <p class="muted">Paste the post office's bulk shipping list as CSV (the demo uses Korea Post-style columns with English names; the mapping, which also reads the Korean column names, is in <code>server/ship.js</code>). Names in the export rarely match PayPal exactly: other scripts, surname first, capitals, postal codes without hyphens. AI matches each row to a pledge; Quorum then adds the tracking number to that fan's PayPal capture (<code>POST /v2/checkout/orders/{id}/track</code>, carrier <code>KR_KOREA_POST</code>). PayPal shows it to the fan, and tracking on file helps with "item not received" claims.</p>
+    <textarea id="csv" placeholder="Tracking number,Recipient,Country code,Postal code,Address,Contents,Weight (g)"></textarea>
+    <div class="row">
+      <button class="brand" id="match">Match rows with AI</button>
+      <button class="ghost" id="demo" type="button">Load demo export</button>
+      <span id="msg"></span>
+    </div>
+  </section>
+  <section class="card hidden" id="result">
+    <div class="spread"><h2 id="r-title">Matches</h2><span id="r-tag"></span></div>
+    <table><thead><tr><th>#</th><th>Export row</th><th>Pledge</th><th>Confidence</th><th>Why</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+    <div class="row" style="margin-top:12px"><button class="brand" id="upload">Add tracking in PayPal</button><span id="up-msg"></span></div>
+  </section>
+</main>
+<script type="module">
+  import { api, esc, header, aiTag, slugFromPath, busy } from '/js/common.js';
+  const slug = slugFromPath(2);
+  await header({ slug, active: 'ship' });
+  const view = await api(`/api/studio/${slug}`);
+  document.getElementById('by').textContent = `${view.campaign.creator_name} · ${view.campaign.title}`;
+  const byId = Object.fromEntries(view.pledges.map((p) => [p.id, p]));
+  let matches = [];
+  if (view.campaign.status !== 'settled') document.getElementById('msg').innerHTML = '<span class="err">Settle the campaign first; only captured pledges ship.</span>';
+
+  document.getElementById('demo').onclick = async () => {
+    document.getElementById('csv').value = await api(`/api/studio/${slug}/shipping/demo-export`);
+  };
+  document.getElementById('match').onclick = async (e) => {
+    const btn = e.currentTarget;
+    busy(btn, true, 'Matching');
+    try {
+      const r = await api(`/api/studio/${slug}/shipping/match`, { body: { csv_text: document.getElementById('csv').value } });
+      // Rows that need a human look come first.
+      const rank = (m) => (!m.pledge_id ? 0 : m.confidence === 'low' ? 1 : m.confidence === 'medium' ? 2 : 3);
+      matches = r.matches.sort((a, b) => rank(a) - rank(b) || a.row - b.row);
+      document.getElementById('r-tag').innerHTML = aiTag(r.ai, 'Matched by AI');
+      render(r);
+    } catch (err) {
+      document.getElementById('msg').innerHTML = `<span class="err">${esc(err.message)}</span>`;
+    } finally {
+      busy(btn, false);
+    }
+  };
+  function render(r) {
+    document.getElementById('result').classList.remove('hidden');
+    const c = (k) => matches.filter((m) => m.confidence === k && m.pledge_id).length;
+    document.getElementById('r-title').textContent = `${matches.length} rows: ${c('high')} high, ${c('medium')} medium, ${matches.filter((m) => !m.pledge_id).length} unmatched`;
+    document.getElementById('rows').innerHTML = matches.map((m, i) => {
+      const p = m.pledge_id ? byId[m.pledge_id] : null;
+      return `<tr><td>${m.row}</td><td>${esc(m.recipient)}<div class="muted" style="font-size:12px">${esc(m.country)} ${esc(m.postal_code)} · ${esc(m.tracking_number)}</div></td>
+        <td>${p ? `${esc(p.buyer.name)}<div class="muted" style="font-size:12px">${esc(p.buyer.country)} ${esc(p.buyer.postal_code || '')}</div>` : '<span class="muted">none</span>'}</td>
+        <td class="conf-${m.confidence}">${esc(m.confidence)}</td><td style="font-size:13px">${esc(m.reason)}</td>
+        <td>${m.pledge_id ? `<input type="checkbox" data-i="${i}" ${m.confidence === 'low' ? '' : 'checked'} style="width:auto">` : ''}</td></tr>`;
+    }).join('');
+  }
+  document.getElementById('upload').onclick = async (e) => {
+    const btn = e.currentTarget;
+    const picked = [...document.querySelectorAll('#rows input:checked')].map((b) => matches[Number(b.dataset.i)]);
+    busy(btn, true, 'Adding tracking');
+    try {
+      const r = await api(`/api/studio/${slug}/shipping/upload`, { body: { matches: picked } });
+      const n = (s) => r.results.filter((x) => x.status === s).length;
+      document.getElementById('up-msg').innerHTML = `<span class="ok">${n('uploaded')} tracking numbers added in PayPal${n('simulated') ? `, ${n('simulated')} simulated` : ''}.</span>${n('failed') ? ` <span class="err">${n('failed')} failed</span>` : ''}`;
+    } catch (err) {
+      document.getElementById('up-msg').innerHTML = `<span class="err">${esc(err.message)}</span>`;
+    } finally {
+      busy(btn, false);
+    }
+  };
+</script>
+</body>
+</html>

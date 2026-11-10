@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio · Quorum</title>
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  .optcard { display: grid; grid-template-columns: 40px 1fr; gap: 10px; }
+  .optcard img { width: 40px; height: 40px; border-radius: 8px; }
+  .optcard .l { font-size: 13px; color: var(--muted); }
+  .age { font-size: 12px; white-space: nowrap; }
+  td .sub { font-size: 12px; color: var(--muted); }
+  .two { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="stack">
+  <div class="spread">
+    <div><div class="muted" id="by"></div><h1 id="title">Studio</h1></div>
+    <div class="row" id="actions"></div>
+  </div>
+
+  <section class="grid g4" id="kpis"></section>
+  <section class="grid g4" id="opts"></section>
+
+  <div class="two">
+    <section class="card">
+      <div class="spread"><h2>Pledges</h2><span class="muted" id="pl-count"></span></div>
+      <p class="muted" style="font-size:13px">Each pledge is one PayPal authorization. PayPal honors an authorization for 3 days and keeps it valid for 29; after day 3 a capture is still attempted but funds are not guaranteed, so you can reauthorize live pledges here.</p>
+      <table><thead><tr><th>Fan</th><th>Items</th><th class="r">Held</th><th>Hold age</th><th>Status</th></tr></thead><tbody id="pledges"></tbody></table>
+      <div class="row" style="margin-top:10px"><button class="ghost small" id="more">Show all</button></div>
+    </section>
+    <aside class="stack">
+      <section class="card"><h3>Activity</h3><ul class="feed" id="feed"></ul></section>
+      <section class="card hidden" id="ledger-card"><div class="spread"><h3>Mock PayPal ledger</h3><span class="pill mock">MOCK</span></div><div id="ledger" style="font-size:13px"></div></section>
+    </aside>
+  </div>
+</main>
+<script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "quorum",
+  "version": "0.1.0",
+  "description": "Small-batch pre-orders on PayPal authorizations: fans are charged only for the items that get made.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "demo": "node scripts/seed.js && node server/index.js",
+    "seed": "node scripts/seed.js",
+    "seed:keep-live": "node scripts/seed.js --keep-live",
+    "test": "node --test test/engine.test.js test/flow.test.js test/ai-path.test.js test/keep-live.test.js",
+    "check": "node scripts/check-setup.js"
+  }
+}

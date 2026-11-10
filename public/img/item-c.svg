@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2856"/><stop offset="1" stop-color="#55407a"/></linearGradient>
+    <linearGradient id="holo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bfe7ff"/><stop offset=".35" stop-color="#f6d3ff"/><stop offset=".7" stop-color="#fff2c2"/><stop offset="1" stop-color="#c8ffe1"/></linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="24" fill="url(#bg)"/>
+  <rect x="52" y="28" width="136" height="184" rx="10" fill="url(#holo)" transform="rotate(-6 120 120)"/>
+  <g transform="rotate(-6 120 120)">
+    <g transform="translate(92 74)"><circle r="20" fill="#f2c14e" stroke="#fff" stroke-width="4"/><circle cx="-7" cy="-2" r="3" fill="#3a2856"/><circle cx="7" cy="-2" r="3" fill="#3a2856"/></g>
+    <g transform="translate(148 82)"><rect x="-12" y="-17" width="24" height="34" rx="9" fill="#e5533d" stroke="#fff" stroke-width="4"/><rect x="-6" y="-9" width="12" height="18" rx="4" fill="#ffd166"/></g>
+    <g transform="translate(96 140)"><path d="M0 -20 L6 -6 L21 -6 L9 3 L13 18 L0 9 L-13 18 L-9 3 L-21 -6 L-6 -6 Z" fill="#ffd166" stroke="#fff" stroke-width="4" stroke-linejoin="round"/></g>
+    <g transform="translate(150 146)"><circle r="20" fill="#fff3c4" stroke="#fff" stroke-width="4"/><circle cx="8" cy="-6" r="17" fill="#c9b8f0"/></g>
+    <g transform="translate(120 186)"><rect x="-34" y="-9" width="68" height="18" rx="9" fill="#3a2856" stroke="#fff" stroke-width="3"/><text x="0" y="5" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">NIGHT</text></g>
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quorum: pre-orders that only charge for what gets made</title>
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  .hero { padding: 36px 0 8px; }
+  .hero h1 { font-size: 36px; max-width: 760px; }
+  .hero p { font-size: 17px; max-width: 700px; color: #3d3a35; }
+  .flow { counter-reset: s; }
+  .flow .card { position: relative; padding-top: 34px; }
+  .flow .card::before { counter-increment: s; content: counter(s); position: absolute; top: 12px; left: 20px; width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+  .flow h3 { margin-top: 4px; }
+  .who li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<main class="stack">
+  <section class="hero">
+    <h1>Pre-orders that only charge for what gets made.</h1>
+    <p>Small-batch makers have to promise a factory minimum before they know demand. Quorum takes pre-orders as PayPal authorizations, then captures only the items that go to the factory. The rest of each hold is released, so there is no refund to process.</p>
+    <div class="row" id="cta" style="margin-top:16px"></div>
+  </section>
+
+  <section class="grid g4 flow">
+    <div class="card"><h3>Paste your post</h3><p class="muted">Write the pre-order post and paste the factory quote the way you already do, in Korean or any language. AI turns them into a campaign with prices, price breaks and shipping, and asks about anything unclear.</p></div>
+    <div class="card"><h3>Fans place a hold</h3><p class="muted">Fans abroad pay with PayPal. With <code>intent=AUTHORIZE</code>, PayPal holds the amount and charges nothing yet. Progress toward each item's minimum is public.</p></div>
+    <div class="card"><h3>Decide per item</h3><p class="muted">At close, Quorum computes cost, profit and leftover stock for every option. AI recommends go or cancel using your own notes. You approve.</p></div>
+    <div class="card"><h3>Charge exactly that</h3><p class="muted">Partial capture for each fan, voids where nothing is made, a note in their language on the PayPal receipt, and tracking numbers added to each capture.</p></div>
+  </section>
+
+  <section class="card">
+    <h2>Who it is for</h2>
+    <ul class="who">
+      <li>Illustrators selling goods of their own characters (acrylic keyrings, stands, stickers, pins) to overseas fans, who today run a non-binding demand survey on a form and then chase payments.</li>
+      <li>Zine makers, keycap designers, ceramic studios: anyone whose factory or print shop has a minimum order and price breaks.</li>
+    </ul>
+  </section>
+</main>
+<script type="module">
+  import { header, esc } from '/js/common.js';
+  const status = await header({});
+  const c = status.campaigns[0];
+  document.getElementById('cta').innerHTML = c
+    ? `<a class="btn brand" href="/c/${c.slug}">Open the demo campaign (fan view)</a>
+       <a class="btn ghost" href="/studio/${c.slug}">Creator studio</a>
+       <a class="btn ghost" href="/studio/new">Draft a new campaign</a>`
+    : `<a class="btn brand" href="/studio/new">Draft your first campaign</a> <span class="muted">or run <code>npm run seed</code> for demo data</span>`;
+</script>
+</body>
+</html>

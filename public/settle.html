@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settle · Quorum</title>
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  .dec { display: grid; grid-template-columns: 64px 1fr; gap: 14px; }
+  .dec img { width: 64px; height: 64px; border-radius: 10px; }
+  .scen td, .scen th { padding: 5px 6px; font-size: 13px; }
+  .scen tr.pick td { background: var(--brand-soft); }
+  .rec { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: #f7f6fb; border: 1px solid #e3e1f0; font-size: 14px; }
+  .rec b { display: block; margin-bottom: 2px; }
+  .choices { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .choices label { border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+  .choices input { width: auto; margin: 0; }
+  .choices label.on { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+  .choices label.cancel.on { border-color: var(--stop); background: var(--stop-soft); color: var(--stop); }
+  .guard li { list-style: none; padding: 3px 0; font-size: 14px; }
+  .guard li::before { content: "✓"; color: var(--go); font-weight: 700; margin-right: 8px; }
+  .guard li.bad::before { content: "✕"; color: var(--stop); }
+  .sample { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+  .sample .h { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .rule { font-size: 12px; color: var(--muted); }
+  .rule.diff { color: var(--short); font-weight: 600; }
+</style>
+</head>
+<body>
+<main class="stack">
+  <div class="spread">
+    <div><div class="muted" id="by"></div><h1>Settle pre-orders</h1></div>
+    <div class="steps"><span id="st1">1 Close</span><span id="st2">2 Decide</span><span id="st3">3 Check</span><span id="st4">4 Charge in PayPal</span></div>
+  </div>
+
+  <section class="card hidden" id="open-card">
+    <div class="spread"><div><h2>Pre-orders are still open</h2><p class="muted" id="open-left"></p></div><button class="brand" id="close">Close pre-orders now</button></div>
+  </section>
+
+  <section class="card hidden" id="settled-card">
+    <div class="spread"><div><h2>Settled</h2><p class="muted" id="settled-sum"></p></div><div class="row"><a class="btn ghost" id="csv">Fan messages (CSV)</a><a class="btn brand" id="to-ship">Add tracking numbers</a></div></div>
+  </section>
+
+  <section id="decide" class="stack hidden">
+    <div class="card">
+      <div class="spread"><h2>Which items go to the factory?</h2><span id="rec-tag"></span></div>
+      <p class="muted" id="rec-summary"></p>
+      <div id="rec-problems"></div>
+    </div>
+    <div class="grid g2" id="decisions"></div>
+  </section>
+
+  <section id="check" class="stack hidden">
+    <div class="grid g2">
+      <div class="card">
+        <h2>What happens in PayPal</h2>
+        <table class="num"><tbody id="plan"></tbody></table>
+        <h3 style="margin-top:14px">Factory order</h3>
+        <table class="num"><thead><tr><th>Item</th><th class="r">Pledged</th><th class="r">Order</th><th class="r">Spare</th><th class="r">Cost</th></tr></thead><tbody id="factory"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>Checks before any money moves</h2>
+        <p class="muted" style="font-size:13px">Computed again from campaign prices, independent of the AI. If one fails, nothing is sent.</p>
+        <ul class="guard" id="guard" style="padding:0;margin:8px 0 0"></ul>
+        <p class="muted" style="font-size:13px;margin-top:10px">When you run it, Quorum also reads every live authorization back from PayPal first. A hold that is no longer open, or has a different amount, is skipped and flagged.</p>
+        <div id="honor"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="spread"><h2>What fans will read</h2><span id="notes-tag"></span></div>
+      <p class="muted" style="font-size:13px">The short note goes on the PayPal capture (<code>note_to_payer</code>), which PayPal shows in the fan's transaction history and email. A void has no note field, so for released holds the longer message is yours to send (CSV download after settling). AI writes the wording with placeholders; Quorum fills in every amount.</p>
+      <div class="grid g2" id="samples" style="margin-top:10px"></div>
+    </div>
+    <div class="card">
+      <div class="spread">
+        <div><h2 id="go-title">Charge in PayPal</h2><p class="muted" id="go-sub"></p></div>
+        <button class="brand" id="execute">Approve and run</button>
+      </div>
+      <div id="exec-out"></div>
+    </div>
+  </section>
+</main>
+<script type="module" src="/js/settle.js"></script>
+</body>
+</html>

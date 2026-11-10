@@ -1,0 +1,181 @@
+{
+  "title": "Night Market goods",
+  "creator_name": "Studio Haneul",
+  "summary_en": "Pre-orders for four Night Market goods from Studio Haneul, a small illustration studio in Seoul. PayPal only places a hold when you pre-order. When the 10-day window closes, the studio decides item by item what goes to the factory, mostly the items that reached the factory minimum. You are charged only for items that are made, and the rest of your hold is released.",
+  "duration_days": 10,
+  "ship_estimate_en": "Ships together at the end of November by Korea Post K-Packet.",
+  "options": [
+    {
+      "id": "A",
+      "name_original": "아크릴 키링 양면 6cm",
+      "name_en": "Acrylic keyring, double-sided, 6 cm",
+      "description_en": "Printed on both sides. Comes with a ring, in its own bag.",
+      "price_usd": "9.00",
+      "domestic_price_krw": 12000,
+      "tiers": [
+        {
+          "min_qty": 50,
+          "unit_cost_krw": 3800
+        },
+        {
+          "min_qty": 100,
+          "unit_cost_krw": 2900
+        },
+        {
+          "min_qty": 200,
+          "unit_cost_krw": 2300
+        }
+      ],
+      "fixed_cost_krw": 0
+    },
+    {
+      "id": "B",
+      "name_original": "아크릴 스탠드 12cm (받침 포함)",
+      "name_en": "Acrylic stand with base, 12 cm",
+      "description_en": "Standing figure with a separate clear base.",
+      "price_usd": "16.00",
+      "domestic_price_krw": 22000,
+      "tiers": [
+        {
+          "min_qty": 30,
+          "unit_cost_krw": 7500
+        },
+        {
+          "min_qty": 50,
+          "unit_cost_krw": 6200
+        },
+        {
+          "min_qty": 100,
+          "unit_cost_krw": 5100
+        }
+      ],
+      "fixed_cost_krw": 0
+    },
+    {
+      "id": "C",
+      "name_original": "홀로그램 스티커 A6",
+      "name_en": "Holographic sticker sheet, A6",
+      "description_en": "Kiss-cut sheet of Night Market characters.",
+      "price_usd": "5.00",
+      "domestic_price_krw": 6000,
+      "tiers": [
+        {
+          "min_qty": 100,
+          "unit_cost_krw": 1100
+        },
+        {
+          "min_qty": 300,
+          "unit_cost_krw": 700
+        }
+      ],
+      "fixed_cost_krw": 0
+    },
+    {
+      "id": "D",
+      "name_original": "에나멜 뱃지 3cm 금도금",
+      "name_en": "Enamel pin, gold plated, 3 cm",
+      "description_en": "Hard enamel with a rubber clutch.",
+      "price_usd": "14.00",
+      "domestic_price_krw": 19000,
+      "tiers": [
+        {
+          "min_qty": 100,
+          "unit_cost_krw": 5200
+        }
+      ],
+      "fixed_cost_krw": 180000
+    }
+  ],
+  "shipping_regions": [
+    {
+      "id": "asia",
+      "label_en": "Asia",
+      "price_usd": "5.00",
+      "countries": [
+        "JP",
+        "CN",
+        "TW",
+        "HK",
+        "MO",
+        "SG",
+        "MY",
+        "TH",
+        "VN",
+        "PH",
+        "ID",
+        "IN",
+        "MN",
+        "KH",
+        "BN"
+      ]
+    },
+    {
+      "id": "americas_oceania",
+      "label_en": "Americas and Oceania",
+      "price_usd": "7.00",
+      "countries": [
+        "US",
+        "CA",
+        "MX",
+        "AR",
+        "CL",
+        "CO",
+        "PE",
+        "AU",
+        "NZ"
+      ]
+    },
+    {
+      "id": "europe_other",
+      "label_en": "Europe and everywhere else",
+      "price_usd": "8.00",
+      "countries": []
+    }
+  ],
+  "cost_basis": {
+    "quote_includes_vat": false,
+    "vat_rate": 0.1
+  },
+  "creator_preferences": [
+    {
+      "applies_to": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "text_en": "Studio space is small: about 10 leftover units per item at most."
+    },
+    {
+      "applies_to": [
+        "A",
+        "C"
+      ],
+      "text_en": "A few leftover stickers and keyrings are fine, they sell at events."
+    },
+    {
+      "applies_to": [
+        "D"
+      ],
+      "text_en": "Pins have a separate mold fee. Cancel them if the count is borderline."
+    }
+  ],
+  "questions_for_creator": [
+    {
+      "about": "cost",
+      "question_en": "The factory quote says prices exclude VAT. I added 10% VAT to production cost. Is that right?"
+    },
+    {
+      "about": "fx",
+      "question_en": "PayPal does not take KRW, so fans pay in USD. Which exchange rate should cost estimates use?"
+    },
+    {
+      "about": "D",
+      "question_en": "The pin mold fee (180,000 KRW) is a one-time charge. I counted it once in the pin cost. Correct?"
+    },
+    {
+      "about": "shipping",
+      "question_en": "The post gives one shipping price per region, not per item. I charge shipping once per order. OK?"
+    }
+  ]
+}
